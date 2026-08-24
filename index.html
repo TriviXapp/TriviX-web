@@ -168,9 +168,28 @@
   .boton-play{ display:inline-flex; align-items:center; gap:12px; background:var(--dorado); color:var(--dorado-tinta);
     text-decoration:none; font-weight:800; padding:15px 24px; border-radius:12px; font-size:15.5px;
     box-shadow:0 10px 26px -8px rgba(253,197,0,.5); }
+  .descarga p.chapa-anticipado{ display:inline-flex; align-items:center; gap:9px; margin:0 0 4px;
+    background:linear-gradient(135deg, rgba(253,197,0,.16), rgba(51,201,247,.14));
+    border:1px solid rgba(253,197,0,.45); color:var(--dorado);
+    font-weight:800; font-size:13.5px; letter-spacing:.02em;
+    padding:9px 15px; border-radius:999px; }
+  .descarga p.chapa-anticipado .plazas{ color:var(--tinta); font-weight:700; }
   .nota-ios{ font-size:13px; color:var(--suave); }
   .nota-privacidad{ font-size:12.5px; color:var(--suave); }
   .nota-privacidad a{ color:var(--cian); text-decoration:none; }
+  #rangos{ padding:76px 0; border-top:1px solid var(--linea); }
+  .escalera{ display:grid; grid-template-columns:repeat(7,1fr); gap:14px; margin:34px 0 0; }
+  @media (max-width:900px){ .escalera{ grid-template-columns:repeat(4,1fr); } }
+  @media (max-width:560px){ .escalera{ grid-template-columns:repeat(3,1fr); gap:10px; } }
+  .rango{ display:flex; flex-direction:column; align-items:center; gap:9px; text-align:center;
+    background:var(--panel); border:1px solid var(--linea); border-radius:16px; padding:18px 8px 14px; }
+  .escudo-caja{ line-height:0; }
+  .rango-nombre{ font-size:12.5px; font-weight:800; color:var(--tinta); letter-spacing:.01em; }
+  .datos-rango{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+  .dato{ flex:1 1 190px; background:var(--panel); border:1px solid var(--linea);
+    border-radius:16px; padding:18px 20px; }
+  .dato .cifra{ display:block; font-size:26px; font-weight:800; color:var(--dorado); line-height:1.1; }
+  .dato .pie{ font-size:13.5px; color:var(--suave); }
   .panel-derecho{ background:var(--noche); border:1px solid var(--linea); border-radius:18px; padding:24px; }
   .panel-derecho ul{ list-style:none; margin:0; padding:0; display:grid; gap:12px; }
   .panel-derecho li{ display:flex; gap:10px; font-size:14px; color:var(--tinta); align-items:flex-start; }
@@ -183,6 +202,48 @@
   .footer-links a{ color:var(--suave); text-decoration:none; }
   .footer-links a:hover{ color:var(--tinta); }
   .footer-copy{ font-size:12.5px; color:var(--suave); }
+
+  /* === Movil ===
+     Tres cosas medidas en un telefono de 375 px, no supuestas:
+     1. Los enlaces de navegacion y del pie median 22 px de alto. La guia de Android y de
+        Apple pide 44-48 px para que se acierte con el dedo; se resuelve con padding
+        vertical, sin mover el texto de sitio.
+     2. El relleno de seccion (88 px arriba y abajo) es un valor de escritorio. En movil
+        alarga la pagina sin aportar nada: con seis tarjetas de modo, la seccion medi­a
+        2.400 px de alto.
+     3. Los nombres de rango a 12,5 px se quedaban cortos junto a un escudo de 62 px. */
+  @media (max-width:560px){
+    section{ padding:56px 20px; }
+    .hero{ padding:52px 20px 62px; }
+    .envoltorio{ padding:0 20px; }
+    #rangos{ padding:52px 0; }
+    footer{ padding:34px 20px 26px; }
+    .cabecera-seccion{ margin-bottom:30px; }
+    .cabecera-seccion h2{ font-size:26px; }
+    .cabecera-seccion p{ font-size:15px; }
+
+    /* Zonas tocables de 44 px sin cambiar el aspecto del texto. */
+    .nav-links{ gap:16px; }
+    .nav-links a{ display:inline-flex; align-items:center; min-height:44px; }
+    .footer-links{ gap:16px; }
+    .footer-links a{ display:inline-flex; align-items:center; min-height:44px; }
+    .idiomas button{ min-height:40px; min-width:44px; }
+
+    /* Tarjetas mas compactas: son seis y se recorren en vertical. */
+    .modo{ padding:22px 20px; }
+    .modo h3{ font-size:17px; }
+    .modo p{ font-size:14.5px; }
+    .modo .icono{ margin-bottom:10px; }
+
+    .rango{ padding:14px 6px 12px; }
+    .rango-nombre{ font-size:13px; }
+    .escudo-caja svg{ width:54px; height:60px; }
+
+    .dato{ padding:15px 17px; }
+    .dato .cifra{ font-size:23px; }
+
+    .descarga p.chapa-anticipado{ font-size:12.5px; padding:8px 13px; }
+  }
 
   @media (prefers-reduced-motion:reduce){ *{ transition:none !important; scroll-behavior:auto !important; } }
 </style>
@@ -198,6 +259,7 @@
     </div>
     <nav class="nav-links">
       <a href="#modos"><span lang="es">Modos de juego</span><span lang="en">Game modes</span></a>
+      <a href="#rangos"><span lang="es">Rangos</span><span lang="en">Ranks</span></a>
       <div class="nav-secundarios">
         <a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
         <a href="borrar-cuenta.html"><span lang="es">Eliminar cuenta</span><span lang="en">Delete account</span></a>
@@ -243,8 +305,8 @@
   <div class="envoltorio">
     <div class="cabecera-seccion">
       <span class="eyebrow"><span lang="es">Cómo se juega</span><span lang="en">How to play</span></span>
-      <h2 lang="es">Cuatro formas de demostrar lo que sabes</h2>
-      <h2 lang="en">Four ways to show what you know</h2>
+      <h2 lang="es">Seis formas de demostrar lo que sabes</h2>
+      <h2 lang="en">Six ways to show what you know</h2>
       <p lang="es">Solo, contra un rival o con tu grupo: elige cómo quieres jugar hoy.</p>
       <p lang="en">Solo, against a rival, or with your group — choose how you want to play today.</p>
     </div>
@@ -262,10 +324,28 @@
         <div class="icono">🔥</div>
         <h3 lang="es">Retos diarios</h3>
         <h3 lang="en">Daily challenges</h3>
-        <p lang="es">Un cuestionario nuevo cada día. Mantén la racha, súmate puntos y compite con tus amigos
-        por el mejor resultado de la jornada.</p>
-        <p lang="en">A new quiz every day. Keep your streak alive, rack up points, and compete with your
-        friends for the best score of the day.</p>
+        <p lang="es">Diez preguntas nuevas cada día y 120 segundos para responderlas. Todo el mundo juega
+        exactamente las mismas, así que las puntuaciones se pueden comparar. Mantén la racha y sube en el ranking.</p>
+        <p lang="en">Ten fresh questions every day and 120 seconds to answer them. Everyone plays exactly the
+        same ones, so scores are comparable. Keep your streak alive and climb the leaderboard.</p>
+      </div>
+      <div class="modo semanal">
+        <div class="icono">📅</div>
+        <h3 lang="es">Reto semanal</h3>
+        <h3 lang="en">Weekly challenge</h3>
+        <p lang="es">Una vez por semana, solo dos categorías y muchas más preguntas difíciles. Para cuando el
+        reto diario se te quede corto.</p>
+        <p lang="en">Once a week: only two categories and a lot more hard questions. For when the daily
+        challenge stops being a challenge.</p>
+      </div>
+      <div class="modo evento">
+        <div class="icono">⚡</div>
+        <h3 lang="es">Retos de evento</h3>
+        <h3 lang="en">Event challenges</h3>
+        <p lang="es">De vez en cuando se abre un evento temático con sus propias preguntas y su propia medalla,
+        que solo se consigue mientras dura. Cuando termina, ya no vuelve.</p>
+        <p lang="en">Every now and then a themed event opens up, with its own questions and its own medal —
+        and you can only earn it while the event runs. Once it ends, it's gone for good.</p>
       </div>
       <div class="modo grupos">
         <div class="icono">👥</div>
@@ -280,8 +360,12 @@
         <div class="icono">🏅</div>
         <h3 lang="es">Logros y medallas</h3>
         <h3 lang="en">Achievements &amp; medals</h3>
-        <p lang="es">Cada categoría que dominas suma medallas a tu perfil.</p>
-        <p lang="en">Every category you master adds medals to your profile.</p>
+        <p lang="es">Más de cincuenta logros por jugar, acertar, encadenar rachas y subir de rango. Y el que
+        consigas puedes ponértelo como <strong>título debajo de tu nombre</strong>, para que lo vea tu rival en
+        cada duelo y todo el mundo en el ranking.</p>
+        <p lang="en">Over fifty achievements for playing, answering, keeping streaks alive and climbing the
+        ranks. And any one you earn can be worn as a <strong>title under your name</strong>, so your rival sees
+        it in every duel and everyone sees it on the leaderboard.</p>
         <div class="medallero">
           <div class="medalla bronce"><span class="punto"></span><span lang="es">Bronce</span><span lang="en">Bronze</span></div>
           <div class="medalla plata"><span class="punto"></span><span lang="es">Plata</span><span lang="en">Silver</span></div>
@@ -292,19 +376,85 @@
   </div>
 </section>
 
+<section id="rangos">
+  <div class="envoltorio">
+    <div class="cabecera-seccion">
+      <span class="eyebrow"><span lang="es">Competitivo</span><span lang="en">Ranked</span></span>
+      <h2 lang="es">De Novato a Omnisciente</h2>
+      <h2 lang="en">From Rookie to Omniscient</h2>
+      <p lang="es">Siete rangos y diecinueve divisiones. Ganas duelos, subes; los pierdes, bajas. Y cada dos
+      meses la temporada se reinicia y hay que volver a demostrarlo.</p>
+      <p lang="en">Seven ranks and nineteen divisions. Win duels and you climb; lose them and you drop. And
+      every two months the season resets and you have to prove it all over again.</p>
+    </div>
+    <div class="escalera">
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#1B4FD8" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#3B72E8"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#1B4FD8"/><circle cx="50" cy="57" r="9.5" fill="#FFFFFF"/></svg></div>
+          <span class="rango-nombre" lang="es">Novato</span><span class="rango-nombre" lang="en">Rookie</span>
+        </div>
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#2C7A2C" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#45A845"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#2C7A2C"/><path d="M50 39 L65.12 57 H57.2 V75 H42.8 V57 H34.88 Z" fill="#FFFFFF"/></svg></div>
+          <span class="rango-nombre" lang="es">Aspirante</span><span class="rango-nombre" lang="en">Challenger</span>
+        </div>
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#DB6C0C" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#F2913A"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#DB6C0C"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(0 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(45 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(90 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(135 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(180 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(225 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(270 50 57)"/><rect x="46.48" y="35.56" width="7.04" height="11.2" rx="2.24" fill="#FFFFFF" transform="rotate(315 50 57)"/><circle cx="50" cy="57" r="16" fill="#FFFFFF"/><circle cx="50" cy="57" r="5.76" fill="#DB6C0C"/></svg></div>
+          <span class="rango-nombre" lang="es">Especialista</span><span class="rango-nombre" lang="en">Specialist</span>
+        </div>
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#C01F1F" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#E24141"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#C01F1F"/><path d="M49 49 C45 46 36 45 31 47 V65 C36 63 45 64 49 67 Z" fill="#FFFFFF"/><path d="M51 49 C55 46 64 45 69 47 V65 C64 63 55 64 51 67 Z" fill="#FFFFFF"/></svg></div>
+          <span class="rango-nombre" lang="es">Erudito</span><span class="rango-nombre" lang="en">Scholar</span>
+        </div>
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#6327AE" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#8B4FD6"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#6327AE"/><rect x="46.8" y="61" width="6.4" height="17" rx="2.4" fill="#FFFFFF"/><rect x="42" y="56" width="16" height="6.5" rx="2.6" fill="#FFFFFF"/><path d="M50 33 C59 41 58 52 50 54 C42 52 41 41 50 33 Z" fill="#FFFFFF"/><path d="M50 40 C54 45 54 50 50 51.5 C46 50 46 45 50 40 Z" fill="#6327AE" opacity="0.55"/></svg></div>
+          <span class="rango-nombre" lang="es">Sabio</span><span class="rango-nombre" lang="en">Sage</span>
+        </div>
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#6A3D18" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#8A5626"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#6A3D18"/><polygon points="50.0,38.0 55.0,50.1 68.1,51.1 58.1,59.6 61.2,72.4 50.0,65.5 38.8,72.4 41.9,59.6 31.9,51.1 45.0,50.1" fill="none" stroke="#F7C948" stroke-width="3.5" stroke-linejoin="round"/></svg></div>
+          <span class="rango-nombre" lang="es">Prodigio</span><span class="rango-nombre" lang="en">Prodigy</span>
+        </div>
+        <div class="rango">
+          <div class="escudo-caja"><svg class="escudo" viewBox="0 0 100 112" width="62" height="69" aria-hidden="true"><path d="M50 3 L94 17 V57 C94 84 73 102 50 109 C27 102 6 84 6 57 V17 Z" fill="#FFFFFF" stroke="#D89612" stroke-width="5" stroke-linejoin="round"/><path d="M50 14 L15 25 V57 C15 78 31 92 50 98 Z" fill="#F0B429"/><path d="M50 14 L85 25 V57 C85 78 69 92 50 98 Z" fill="#D89612"/><path d="M29 60 C38 47 62 47 71 60 C62 73 38 73 29 60 Z" fill="#FFFFFF"/><circle cx="50" cy="60" r="7.5" fill="#D89612"/><circle cx="50" cy="60" r="3" fill="#FFFFFF"/><ellipse cx="50" cy="36" rx="15" ry="4.5" fill="none" stroke="#FFFFFF" stroke-width="4"/></svg></div>
+          <span class="rango-nombre" lang="es">Omnisciente</span><span class="rango-nombre" lang="en">Omniscient</span>
+        </div>
+    </div>
+    <div class="datos-rango">
+      <div class="dato">
+        <span class="cifra">19</span>
+        <span class="pie" lang="es">divisiones que escalar</span><span class="pie" lang="en">divisions to climb</span>
+      </div>
+      <div class="dato">
+        <span class="cifra">2</span>
+        <span class="pie" lang="es">meses dura cada temporada</span><span class="pie" lang="en">months per season</span>
+      </div>
+      <div class="dato">
+        <span class="cifra">+20%</span>
+        <span class="pie" lang="es">de puntos al encadenar 3 victorias</span><span class="pie" lang="en">bonus points on a 3-win streak</span>
+      </div>
+      <div class="dato">
+        <span class="cifra">12 s</span>
+        <span class="pie" lang="es">por pregunta en los duelos</span><span class="pie" lang="en">per question in duels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="descarga">
   <div class="envoltorio">
     <div class="descarga">
       <div>
         <span class="eyebrow"><span lang="es">Empieza ya</span><span lang="en">Get started now</span></span>
-        <h2 lang="es">Tu primer duelo empieza en menos de un minuto</h2>
-        <h2 lang="en">Your first duel starts in under a minute</h2>
-        <p lang="es">Descarga TriviX, elige un nombre y empieza a subir de rango. Es gratis para empezar a
-        jugar.</p>
-        <p lang="en">Download TriviX, pick a name, and start climbing the ranks. It's free to start
-        playing.</p>
+        <h2 lang="es">Sé de las primeras 1.000 personas en jugar</h2>
+        <h2 lang="en">Be one of the first 1,000 people to play</h2>
+        <p lang="es">TriviX está en acceso anticipado y las plazas son limitadas. Entra ahora, elige
+        un nombre y empieza a subir de rango antes que nadie. Gratis.</p>
+        <p lang="en">TriviX is in early access and spots are limited. Join now, pick a name and start
+        climbing the ranks before anyone else. Free to play.</p>
         <div class="descarga-botones">
-          <a class="boton-play" href="https://play.google.com/store/apps/details?id=com.trivix.app">▶ <span lang="es">Disponible en Google Play</span><span lang="en">Available on Google Play</span></a>
+          <p class="chapa-anticipado">🚀
+            <span lang="es">Acceso anticipado · <span class="plazas">solo 1.000 plazas</span></span>
+            <span lang="en">Early access · <span class="plazas">only 1,000 spots</span></span>
+          </p>
+          <a class="boton-play" href="https://play.google.com/store/apps/details?id=com.trivixsn.app">▶ <span lang="es">Consigue tu plaza en Google Play</span><span lang="en">Get your spot on Google Play</span></a>
           <span class="nota-ios"><span lang="es">La versión de iOS llegará próximamente.</span><span lang="en">The iOS version is coming soon.</span></span>
           <span class="nota-privacidad">
             <span lang="es">No vendemos tus datos a nadie — <a href="privacidad.html">lee cómo los cuidamos</a>.</span>
@@ -335,6 +485,7 @@
     <a class="marca" href="#inicio" style="font-size:18px;"><span class="icono" style="width:26px;height:26px;font-size:15px;">?</span>Trivi<span class="x">X</span></a>
     <nav class="footer-links">
       <a href="#modos"><span lang="es">Modos de juego</span><span lang="en">Game modes</span></a>
+      <a href="#rangos"><span lang="es">Rangos</span><span lang="en">Ranks</span></a>
       <a href="privacidad.html"><span lang="es">Política de privacidad</span><span lang="en">Privacy policy</span></a>
       <a href="borrar-cuenta.html"><span lang="es">Eliminar cuenta</span><span lang="en">Delete account</span></a>
       <a href="mailto:TriviXsn@gmail.com">TriviXsn@gmail.com</a>
