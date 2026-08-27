@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TriviX — Responde. Aprende. Gana. / Answer. Learn. Win.</title>
 <meta name="description" content="TriviX: pon a prueba lo que sabes, reta a tus amigos en duelos 1vs1 y sube de rango. / Test what you know, challenge friends to 1v1 duels, and climb the ranks.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230F52C9'/%3E%3Ctext x='50' y='71' font-family='Arial,sans-serif' font-weight='900' font-size='62' fill='%23FDC500' text-anchor='middle'%3E?%3C/text%3E%3C/svg%3E">
+<!-- Favicon de 32 px aparte: si solo se le da el de 512, cada navegador lo reduce a su
+     manera para la pestaña y algunos dejan un cerco claro en el borde. El ?v=2 es para
+     que los navegadores que ya guardaron el icono viejo (una interrogacion sobre fondo
+     blanco) se bajen el nuevo; los favicon se cachean con mucha insistencia. -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
+<link rel="icon" type="image/png" sizes="512x512" href="icono.png?v=2">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -53,14 +59,31 @@
   .nav-fila{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto; gap:16px; }
   .marca{ font-size:22px; font-weight:800; letter-spacing:-0.01em; text-decoration:none; display:flex; align-items:center; gap:9px; flex:none; }
   .marca .x{ color:var(--dorado); }
-  .marca .icono{ width:30px; height:30px; border-radius:9px; background:linear-gradient(145deg,var(--azul-claro),var(--indigo));
-    display:flex; align-items:center; justify-content:center; font-weight:800; color:var(--dorado); font-size:17px; flex:none; }
+  /* El icono de verdad de la app, no la interrogacion dibujada a mano que habia antes.
+     Es el mismo fichero que se usa de favicon, asi que el navegador solo lo baja una vez. */
+  /* Sin border-radius a proposito: el PNG ya lleva las esquinas redondeadas y
+     transparentes, con el mismo radio que el icono de la app. Redondearlo otra vez por
+     CSS le comeria azul de las esquinas. */
+  .marca .icono{ width:32px; height:32px; flex:none; display:block; object-fit:contain; }
   .nav-links{ display:flex; align-items:center; gap:22px; font-size:14.5px; font-weight:600; margin-left:auto; }
   .nav-links a{ text-decoration:none; color:var(--suave); }
   .nav-links a:hover{ color:var(--tinta); }
   .nav-cta{ background:var(--dorado); color:var(--dorado-tinta) !important; padding:9px 18px; border-radius:999px; font-weight:800 !important; }
   .nav-secundarios{ display:flex; gap:18px; }
   @media (max-width:760px){ .nav-secundarios{ display:none; } }
+  /* En un telefono de 375 px la fila entera medi­a 464 px: el boton «Jugar» quedaba fuera
+     de la pantalla, cortado. Al permitir que la fila se parta, la marca y los idiomas se
+     quedan arriba y los enlaces bajan a una segunda linea completa; si aun asi no caben,
+     esa linea se desliza en horizontal en vez de recortarse. */
+  @media (max-width:640px){
+    .nav-fila{ flex-wrap:wrap; row-gap:10px; padding:12px 16px; }
+    .marca{ order:1; }
+    .idiomas{ order:2; margin-left:auto; }
+    .nav-links{ order:3; width:100%; margin-left:0; justify-content:space-between; gap:12px;
+      overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
+    .nav-links::-webkit-scrollbar{ display:none; }
+    .nav-links a{ white-space:nowrap; }
+  }
 
   /* Selector de idioma, arriba del todo */
   .idiomas{ display:none; gap:6px; flex:none; }
@@ -245,6 +268,74 @@
     .descarga p.chapa-anticipado{ font-size:12.5px; padding:8px 13px; }
   }
 
+  /* ---------- SOBRE NOSOTROS ---------- */
+  .sobre{ display:grid; grid-template-columns:1.35fr .8fr; gap:34px; align-items:start;
+    background:var(--panel); border:1px solid var(--linea); border-radius:22px; padding:44px 46px; }
+  .sobre p{ color:var(--suave); line-height:1.75; margin:0 0 16px; max-width:62ch; }
+  .sobre p:last-child{ margin-bottom:0; }
+  .sobre .firma{ color:var(--tinta); font-weight:700; }
+  .sobre-tarjeta{ background:var(--panel-2); border:1px solid var(--linea); border-radius:18px;
+    padding:26px 24px; text-align:center; }
+  .sobre-tarjeta img{ width:88px; height:88px; display:block; margin:0 auto 16px; }
+  .sobre-datos{ display:grid; gap:14px; margin-top:20px; text-align:left; }
+  .sobre-dato{ display:flex; align-items:baseline; gap:10px; font-size:14.5px; color:var(--suave); }
+  .sobre-dato b{ color:var(--dorado); font-family:'Baloo 2',sans-serif; font-size:19px; flex:none; }
+  @media (max-width:860px){
+    .sobre{ grid-template-columns:1fr; padding:32px 22px; gap:26px; }
+    .sobre p{ max-width:none; }
+  }
+
+  /* ---------- CONTACTO ---------- */
+  .contacto{ display:grid; grid-template-columns:1fr 1fr; gap:34px; align-items:start; }
+  .form-panel{ background:var(--panel); border:1px solid var(--linea); border-radius:22px; padding:34px 32px; }
+  .campo{ display:block; margin-bottom:18px; }
+  .campo span{ display:block; font-size:13.5px; font-weight:700; color:var(--tinta); margin-bottom:7px; }
+  .campo input, .campo select, .campo textarea{
+    width:100%; box-sizing:border-box; font:inherit; font-size:15px;
+    background:var(--panel-2); color:var(--tinta);
+    border:1px solid var(--linea); border-radius:12px; padding:13px 14px;
+    /* 16px reales en movil evitan que iOS haga zoom al enfocar el campo. */
+    min-height:48px;
+  }
+  .campo textarea{ resize:vertical; min-height:150px; line-height:1.6; }
+  .campo input::placeholder, .campo textarea::placeholder{ color:#6E80AE; }
+  .campo input:focus, .campo select:focus, .campo textarea:focus{ border-color:var(--cian); outline:none;
+    box-shadow:0 0 0 3px rgba(51,201,247,.16); }
+  .campo select{ appearance:none; cursor:pointer;
+    background-image:linear-gradient(45deg,transparent 50%,var(--suave) 50%),linear-gradient(135deg,var(--suave) 50%,transparent 50%);
+    background-position:calc(100% - 20px) 50%, calc(100% - 14px) 50%;
+    background-size:6px 6px, 6px 6px; background-repeat:no-repeat; padding-right:42px; }
+  .form-fila{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .boton-enviar{ width:100%; font:inherit; font-weight:800; font-size:16px; cursor:pointer;
+    background:var(--dorado); color:var(--dorado-tinta); border:none; border-radius:14px;
+    padding:16px 20px; min-height:52px; transition:transform .15s ease, filter .15s ease; }
+  .boton-enviar:hover{ filter:brightness(1.06); transform:translateY(-1px); }
+  .form-nota{ font-size:13px; color:var(--suave); margin:14px 0 0; line-height:1.6; }
+  .form-nota a{ color:var(--cian); }
+  /* Trampa antispam: es invisible para las personas y los robots la rellenan. */
+  .miel{ position:absolute; left:-5000px; width:1px; height:1px; overflow:hidden; }
+
+  /* ---------- REDES ---------- */
+  .redes-panel{ background:var(--panel); border:1px solid var(--linea); border-radius:22px; padding:34px 32px; }
+  .red{ display:flex; align-items:center; gap:16px; text-decoration:none;
+    background:var(--panel-2); border:1px solid var(--linea); border-radius:16px;
+    padding:18px 20px; min-height:60px; transition:border-color .15s ease, transform .15s ease; }
+  .red:hover{ border-color:var(--cian); transform:translateY(-2px); }
+  .red svg{ width:30px; height:30px; flex:none; }
+  .red-texto{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .red-texto b{ font-family:'Baloo 2',sans-serif; font-size:17px; color:var(--tinta); }
+  .red-texto span{ font-size:13.5px; color:var(--suave); }
+  .red-flecha{ margin-left:auto; color:var(--suave); font-size:20px; flex:none; }
+  .redes-pie{ font-size:13.5px; color:var(--suave); line-height:1.7; margin:18px 0 0; }
+  .redes-pie a{ color:var(--cian); }
+  @media (max-width:860px){
+    .contacto{ grid-template-columns:1fr; gap:22px; }
+    .form-panel, .redes-panel{ padding:26px 20px; }
+  }
+  @media (max-width:460px){
+    .form-fila{ grid-template-columns:1fr; gap:0; }
+  }
+
   @media (prefers-reduced-motion:reduce){ *{ transition:none !important; scroll-behavior:auto !important; } }
 </style>
 </head>
@@ -252,7 +343,7 @@
 
 <header class="nav">
   <div class="nav-fila">
-    <a class="marca" href="#inicio"><span class="icono">?</span>Trivi<span class="x">X</span></a>
+    <a class="marca" href="#inicio"><img class="icono" src="icono.png" alt="" width="32" height="32">Trivi<span class="x">X</span></a>
     <div class="idiomas">
       <button type="button" data-idioma="es" aria-pressed="true">ES</button>
       <button type="button" data-idioma="en" aria-pressed="false">EN</button>
@@ -260,7 +351,9 @@
     <nav class="nav-links">
       <a href="#modos"><span lang="es">Modos de juego</span><span lang="en">Game modes</span></a>
       <a href="#rangos"><span lang="es">Rangos</span><span lang="en">Ranks</span></a>
+      <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
       <div class="nav-secundarios">
+        <a href="#sobre"><span lang="es">Sobre nosotros</span><span lang="en">About us</span></a>
         <a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a>
         <a href="borrar-cuenta.html"><span lang="es">Eliminar cuenta</span><span lang="en">Delete account</span></a>
       </div>
@@ -478,14 +571,172 @@
   </div>
 </section>
 
+<section id="sobre">
+  <div class="envoltorio">
+    <div class="cabecera-seccion">
+      <span class="eyebrow"><span lang="es">Quién hay detrás</span><span lang="en">Who is behind this</span></span>
+      <h2 lang="es">Sobre nosotros</h2>
+      <h2 lang="en">About us</h2>
+      <p lang="es">Ni estudio, ni oficina, ni equipo de veinte personas.</p>
+      <p lang="en">No studio, no office, no team of twenty.</p>
+    </div>
+    <div class="sobre">
+      <div>
+        <p lang="es">Detrás de TriviX hay <b class="firma">un chaval con ganas de hacer su propio juego para
+        móvil</b> y de aprender por el camino. Sin empresa detrás, sin inversores y sin nadie a quien
+        pasarle los marrones cuando algo se rompe.</p>
+        <p lang="en">Behind TriviX there is <b class="firma">one guy who wants to build his own mobile
+        game</b> and learn along the way. No company backing it, no investors, and nobody else to hand
+        the problems to when something breaks.</p>
+
+        <p lang="es">Empecé porque siempre me han gustado los juegos de preguntas, pero quería uno que
+        fuese rápido de verdad: que se pudiese jugar en cinco minutos en el autobús, que tuviese pique
+        con los amigos y que no te pidiera dinero cada dos pantallas. Como no encontré exactamente eso,
+        me puse a hacerlo.</p>
+        <p lang="en">I started because I have always loved quiz games, but I wanted one that was
+        genuinely quick: something you could play in five minutes on the bus, that gave you real
+        bragging rights against your friends, and that did not ask you for money every other screen.
+        I could not find exactly that, so I set out to build it.</p>
+
+        <p lang="es">Todo lo que ves —las más de 4.000 preguntas, los duelos 1 contra 1, los rangos, los
+        grupos con chat, incluso esta misma web— lo he ido montando poco a poco, equivocándome bastante
+        y arreglándolo después. No soy un estudio profesional y se nota en algunas cosas, pero cada
+        versión sale mejor que la anterior, y eso es exactamente lo que quiero seguir haciendo.</p>
+        <p lang="en">Everything you see here — the 4,000-plus questions, the 1-on-1 duels, the ranks, the
+        groups with their own chat, even this website — I have put together bit by bit, getting plenty of
+        things wrong and fixing them afterwards. I am not a professional studio and it shows in places,
+        but every version comes out better than the last, and that is exactly what I want to keep doing.</p>
+
+        <p lang="es">Por eso me importa de verdad lo que pienses. Si algo no te cuadra, si echas de menos
+        una categoría, si encuentras una pregunta mal planteada o si simplemente quieres contarme qué
+        cambiarías, <a href="#contacto">escríbeme aquí abajo</a>. Lo leo todo, y buena parte de lo que
+        tiene el juego hoy salió de que alguien se molestara en decírmelo.</p>
+        <p lang="en">That is why what you think genuinely matters to me. If something feels off, if a
+        category is missing, if you spot a badly worded question, or if you just want to tell me what you
+        would change, <a href="#contacto">write to me below</a>. I read everything, and a good part of
+        what the game has today came from someone taking the time to tell me.</p>
+      </div>
+      <aside class="sobre-tarjeta">
+        <img src="icono.png" alt="TriviX" width="88" height="88">
+        <b style="font-family:'Baloo 2',sans-serif;font-size:21px;">TriviX</b>
+        <div class="sobre-datos">
+          <p class="sobre-dato"><b>+4.000</b><span lang="es">preguntas en 7 categorías</span><span lang="en">questions across 7 categories</span></p>
+          <p class="sobre-dato"><b>1vs1</b><span lang="es">duelos contra otros jugadores</span><span lang="en">duels against other players</span></p>
+          <p class="sobre-dato"><b>+50</b><span lang="es">logros por desbloquear</span><span lang="en">achievements to unlock</span></p>
+          <p class="sobre-dato"><b>0 €</b><span lang="es">gratis, sin pagar por jugar</span><span lang="en">free, no paying to play</span></p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="envoltorio">
+    <div class="cabecera-seccion">
+      <span class="eyebrow"><span lang="es">Hablamos</span><span lang="en">Let’s talk</span></span>
+      <h2 lang="es">Contacta con nosotros</h2>
+      <h2 lang="en">Contact us</h2>
+      <p lang="es">Dudas, fallos, ideas o una pregunta mal puesta: cuéntamelo y te respondo.</p>
+      <p lang="en">Questions, bugs, ideas or a badly worded question — tell me and I will reply.</p>
+    </div>
+    <div class="contacto">
+      <div class="form-panel">
+        <!-- FormSubmit reenvia el formulario al correo sin necesidad de servidor, que es lo
+             unico que se puede hacer en GitHub Pages: aqui no hay backend donde procesar nada. -->
+        <form action="https://formsubmit.co/trivixsn@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Mensaje desde la web de TriviX">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="text" name="_honey" class="miel" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <div class="form-fila">
+            <label class="campo">
+              <span lang="es">Tu nombre</span><span lang="en">Your name</span>
+              <input type="text" name="Nombre" required autocomplete="name"
+                placeholder="Álex" data-ph-es="Álex" data-ph-en="Alex">
+            </label>
+            <label class="campo">
+              <span lang="es">Tu correo</span><span lang="en">Your email</span>
+              <input type="email" name="Correo" required autocomplete="email" placeholder="alex@correo.com">
+            </label>
+          </div>
+
+          <label class="campo">
+            <span lang="es">¿De qué se trata?</span><span lang="en">What is it about?</span>
+            <!-- Las opciones NO se traducen con [lang] como el resto de la pagina: esconder
+                 un <option> con display:none no funciona igual en todos los navegadores.
+                 Aqui el texto lo cambia ponerIdioma() leyendo data-es y data-en, y el value
+                 se queda fijo en castellano para que los correos lleguen siempre iguales. -->
+            <select name="Asunto" id="asunto">
+              <option value="Sugerencia o idea"         data-es="Sugerencia o idea"         data-en="Suggestion or idea">Sugerencia o idea</option>
+              <option value="Una pregunta está mal"     data-es="Una pregunta está mal"     data-en="A question is wrong">Una pregunta está mal</option>
+              <option value="Fallo en el juego"         data-es="Fallo en el juego"         data-en="Bug in the game">Fallo en el juego</option>
+              <option value="Problema con mi cuenta"    data-es="Problema con mi cuenta"    data-en="Problem with my account">Problema con mi cuenta</option>
+              <option value="Otra cosa"                 data-es="Otra cosa"                 data-en="Something else">Otra cosa</option>
+            </select>
+          </label>
+
+          <label class="campo">
+            <span lang="es">Tu mensaje</span><span lang="en">Your message</span>
+            <textarea name="Mensaje" required rows="6" placeholder="Cuéntame lo que quieras…"
+              data-ph-es="Cuéntame lo que quieras…" data-ph-en="Tell me anything…"></textarea>
+          </label>
+
+          <button class="boton-enviar" type="submit">
+            <span lang="es">Enviar mensaje</span><span lang="en">Send message</span>
+          </button>
+
+          <p class="form-nota">
+            <span lang="es">Tu mensaje llega directo a <b>TriviXsn@gmail.com</b>. Solo uso tu correo para
+            responderte — nada más. Puedes leer la <a href="privacidad.html">política de privacidad</a>.</span>
+            <span lang="en">Your message goes straight to <b>TriviXsn@gmail.com</b>. I only use your email
+            to reply to you — nothing else. You can read the <a href="privacidad.html">privacy policy</a>.</span>
+          </p>
+        </form>
+      </div>
+
+      <div class="redes-panel">
+        <h3 style="margin:0 0 6px;font-size:21px;">
+          <span lang="es">Nuestras redes sociales</span><span lang="en">Our social media</span>
+        </h3>
+        <p class="redes-pie" style="margin:0 0 20px;">
+          <span lang="es">Subimos preguntas, duelos y novedades de la app.</span>
+          <span lang="en">We post questions, duels and app news.</span>
+        </p>
+
+        <a class="red" href="https://www.tiktok.com/@trivixstudio" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.1v12.4a2.59 2.59 0 0 1-2.6 2.5 2.59 2.59 0 0 1-2.59-2.59 2.59 2.59 0 0 1 3.3-2.49v-3.2a5.73 5.73 0 0 0-.71-.05A5.79 5.79 0 0 0 4.06 15.4a5.79 5.79 0 0 0 9.97 3.98 5.76 5.76 0 0 0 1.61-4V9.01a7.35 7.35 0 0 0 4.3 1.38V7.28a4.29 4.29 0 0 1-3.34-1.46Z" fill="#33C9F7"/>
+          </svg>
+          <span class="red-texto">
+            <b>TikTok</b>
+            <span>@TriviXStudio</span>
+          </span>
+          <span class="red-flecha" aria-hidden="true">↗</span>
+        </a>
+
+        <p class="redes-pie">
+          <span lang="es">¿Prefieres el correo de toda la vida? Escribe a
+          <a href="mailto:TriviXsn@gmail.com">TriviXsn@gmail.com</a>.</span>
+          <span lang="en">Prefer plain old email? Write to
+          <a href="mailto:TriviXsn@gmail.com">TriviXsn@gmail.com</a>.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
   <div class="footer-int">
-    <a class="marca" href="#inicio" style="font-size:18px;"><span class="icono" style="width:26px;height:26px;font-size:15px;">?</span>Trivi<span class="x">X</span></a>
+    <a class="marca" href="#inicio" style="font-size:18px;"><img class="icono" src="icono.png" alt="" width="28" height="28" style="width:28px;height:28px;">Trivi<span class="x">X</span></a>
     <nav class="footer-links">
       <a href="#modos"><span lang="es">Modos de juego</span><span lang="en">Game modes</span></a>
       <a href="#rangos"><span lang="es">Rangos</span><span lang="en">Ranks</span></a>
+      <a href="#sobre"><span lang="es">Sobre nosotros</span><span lang="en">About us</span></a>
+      <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
+      <a href="https://www.tiktok.com/@trivixstudio" target="_blank" rel="noopener noreferrer">TikTok</a>
       <a href="privacidad.html"><span lang="es">Política de privacidad</span><span lang="en">Privacy policy</span></a>
       <a href="borrar-cuenta.html"><span lang="es">Eliminar cuenta</span><span lang="en">Delete account</span></a>
       <a href="mailto:TriviXsn@gmail.com">TriviXsn@gmail.com</a>
@@ -580,6 +831,21 @@
     for(k = 0; k < botones.length; k++){
       botones[k].setAttribute('aria-pressed',
         botones[k].getAttribute('data-idioma') === nuevo ? 'true' : 'false');
+    }
+    // El desplegable de asunto se traduce a mano: ver el comentario junto al <select>.
+    var sel = document.getElementById('asunto');
+    if(sel){
+      for(var o = 0; o < sel.options.length; o++){
+        var op = sel.options[o];
+        var txt = op.getAttribute('data-' + nuevo);
+        if(txt) op.textContent = txt;
+      }
+    }
+    // Los marcadores de posicion tampoco son elementos, asi que van igual.
+    var conMarcador = document.querySelectorAll('[data-ph-es]');
+    for(var m = 0; m < conMarcador.length; m++){
+      var ph = conMarcador[m].getAttribute('data-ph-' + nuevo);
+      if(ph) conMarcador[m].setAttribute('placeholder', ph);
     }
     try{ localStorage.setItem('trivix-legal-idioma', nuevo); }catch(e){}
     if(temporizador) clearTimeout(temporizador);
