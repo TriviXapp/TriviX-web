@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TriviX — Responde. Aprende. Gana. / Answer. Learn. Win.</title>
-<meta name="description" content="TriviX: pon a prueba lo que sabes, reta a tus amigos en duelos 1vs1 y sube de rango. / Test what you know, challenge friends to 1v1 duels, and climb the ranks.">
+<title>TriviX League — Responde. Aprende. Gana. / Answer. Learn. Win.</title>
+<meta name="description" content="TriviX League: pon a prueba lo que sabes, reta a tus amigos en duelos 1vs1 y sube de rango. / Test what you know, challenge friends to 1v1 duels, and climb the ranks.">
 <!-- Favicon de 32 px aparte: si solo se le da el de 512, cada navegador lo reduce a su
      manera para la pestaña y algunos dejan un cerco claro en el borde. El ?v=2 es para
      que los navegadores que ya guardaron el icono viejo (una interrogacion sobre fondo
      blanco) se bajen el nuevo; los favicon se cachean con mucha insistencia. -->
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
-<link rel="icon" type="image/png" sizes="512x512" href="icono.png?v=2">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=3">
+<link rel="icon" type="image/png" sizes="512x512" href="icono.png?v=3">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -59,6 +59,11 @@
   .nav-fila{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto; gap:16px; }
   .marca{ font-size:22px; font-weight:800; letter-spacing:-0.01em; text-decoration:none; display:flex; align-items:center; gap:9px; flex:none; }
   .marca .x{ color:var(--dorado); }
+  /* "League" en una segunda linea, como en el logo del juego: en una sola linea la marca
+     medi­a 210 px y en un telefono estrecho empujaba fuera el boton de "Jugar". La L va en
+     dorado igual que la X, que es lo que las hace pareja. */
+  .marca-txt{ display:flex; flex-direction:column; line-height:1; }
+  .marca-league{ font-size:0.62em; letter-spacing:0.04em; margin-top:-0.06em; }
   /* El icono de verdad de la app, no la interrogacion dibujada a mano que habia antes.
      Es el mismo fichero que se usa de favicon, asi que el navegador solo lo baja una vez. */
   /* Sin border-radius a proposito: el PNG ya lleva las esquinas redondeadas y
@@ -113,6 +118,9 @@
     padding:7px 14px; border-radius:999px; text-transform:uppercase; }
   .titulo{ font-size:clamp(46px,7.5vw,84px); font-weight:800; line-height:.95; margin:20px 0 6px; letter-spacing:-0.01em; }
   .titulo .trivi{ color:#fff; } .titulo .x{ color:var(--dorado); }
+  /* LEAGUE debajo y muy pegado, como el logo del juego: en una sola linea, a 84 px, no cabe
+     en el hero de un portatil. La L va en dorado igual que la X. */
+  .titulo .league{ display:block; font-size:0.66em; letter-spacing:0.02em; margin-top:-0.14em; }
   .eslogan{ font-size:clamp(19px,2.6vw,26px); font-weight:700; margin:2px 0 20px; }
   .eslogan .r{ color:#fff; } .eslogan .a{ color:var(--dorado); } .eslogan .g{ color:var(--cian); }
   .hero p.sub{ color:var(--suave); font-size:16.5px; max-width:46ch; margin:0 0 30px; }
@@ -343,7 +351,7 @@
 
 <header class="nav">
   <div class="nav-fila">
-    <a class="marca" href="#inicio"><img class="icono" src="icono.png" alt="" width="32" height="32">Trivi<span class="x">X</span></a>
+    <a class="marca" href="#inicio"><img class="icono" src="icono.png?v=3" alt="" width="32" height="32"><span class="marca-txt"><span>Trivi<span class="x">X</span></span><span class="marca-league"><span class="x">L</span>EAGUE</span></span></a>
     <div class="idiomas">
       <button type="button" data-idioma="es" aria-pressed="true">ES</button>
       <button type="button" data-idioma="en" aria-pressed="false">EN</button>
@@ -368,7 +376,7 @@
   <div class="hero-int">
     <div>
       <span class="eyebrow"><span lang="es">Trivia · Duelos · Rankings</span><span lang="en">Trivia · Duels · Rankings</span></span>
-      <h1 class="titulo"><span class="trivi">Trivi</span><span class="x">X</span></h1>
+      <h1 class="titulo"><span class="trivi">Trivi</span><span class="x">X</span><span class="league"><span class="x">L</span>EAGUE</span></h1>
       <p class="eslogan" lang="es"><span class="r">Responde.</span> <span class="a">Aprende.</span> <span class="g">Gana.</span></p>
       <p class="eslogan" lang="en"><span class="r">Answer.</span> <span class="a">Learn.</span> <span class="g">Win.</span></p>
       <p class="sub" lang="es">Pon a prueba lo que sabes, reta a tus amigos en duelos 1 contra 1 y sube de rango
@@ -376,7 +384,7 @@
       <p class="sub" lang="en">Test what you know, challenge your friends to 1-on-1 duels, and climb the ranks
       every day. Thousands of questions are waiting for you.</p>
       <div class="cta-fila">
-        <a class="boton-oro" href="#descarga">▶ <span lang="es">Descargar TriviX</span><span lang="en">Download TriviX</span></a>
+        <a class="boton-oro" href="#descarga">▶ <span lang="es">Descargar TriviX League</span><span lang="en">Download TriviX League</span></a>
         <a class="boton-fantasma" href="#modos"><span lang="es">Ver modos de juego</span><span lang="en">See game modes</span></a>
       </div>
     </div>
@@ -536,16 +544,16 @@
     <div class="descarga">
       <div>
         <span class="eyebrow"><span lang="es">Empieza ya</span><span lang="en">Get started now</span></span>
-        <h2 lang="es">Sé de las primeras 1.000 personas en jugar</h2>
-        <h2 lang="en">Be one of the first 1,000 people to play</h2>
-        <p lang="es">TriviX está en acceso anticipado y las plazas son limitadas. Entra ahora, elige
-        un nombre y empieza a subir de rango antes que nadie. Gratis.</p>
-        <p lang="en">TriviX is in early access and spots are limited. Join now, pick a name and start
-        climbing the ranks before anyone else. Free to play.</p>
+        <h2 lang="es">Ya disponible en Google Play</h2>
+        <h2 lang="en">Out now on Google Play</h2>
+        <p lang="es">TriviX League ya está publicado en 177 países. Descárgalo, elige un nombre y
+        empieza a subir de rango. Gratis.</p>
+        <p lang="en">TriviX League is out in 177 countries. Download it, pick a name and start
+        climbing the ranks. Free to play.</p>
         <div class="descarga-botones">
           <p class="chapa-anticipado">🚀
-            <span lang="es">Acceso anticipado · <span class="plazas">solo 1.000 plazas</span></span>
-            <span lang="en">Early access · <span class="plazas">only 1,000 spots</span></span>
+            <span lang="es">Disponible en <span class="plazas">177 países</span></span>
+            <span lang="en">Available in <span class="plazas">177 countries</span></span>
           </p>
           <a class="boton-play" href="https://play.google.com/store/apps/details?id=com.trivixsn.app">▶ <span lang="es">Consigue tu plaza en Google Play</span><span lang="en">Get your spot on Google Play</span></a>
           <span class="nota-ios"><span lang="es">La versión de iOS llegará próximamente.</span><span lang="en">The iOS version is coming soon.</span></span>
@@ -582,10 +590,10 @@
     </div>
     <div class="sobre">
       <div>
-        <p lang="es">Detrás de TriviX hay <b class="firma">un chaval con ganas de hacer su propio juego para
+        <p lang="es">Detrás de TriviX League hay <b class="firma">un chaval con ganas de hacer su propio juego para
         móvil</b> y de aprender por el camino. Sin empresa detrás, sin inversores y sin nadie a quien
         pasarle los marrones cuando algo se rompe.</p>
-        <p lang="en">Behind TriviX there is <b class="firma">one guy who wants to build his own mobile
+        <p lang="en">Behind TriviX League there is <b class="firma">one guy who wants to build his own mobile
         game</b> and learn along the way. No company backing it, no investors, and nobody else to hand
         the problems to when something breaks.</p>
 
@@ -617,10 +625,10 @@
         what the game has today came from someone taking the time to tell me.</p>
       </div>
       <aside class="sobre-tarjeta">
-        <img src="icono.png" alt="TriviX" width="88" height="88">
-        <b style="font-family:'Baloo 2',sans-serif;font-size:21px;">TriviX</b>
+        <img src="icono.png?v=3" alt="TriviX League" width="88" height="88">
+        <b style="font-family:'Baloo 2',sans-serif;font-size:21px;">TriviX League</b>
         <div class="sobre-datos">
-          <p class="sobre-dato"><b>+4.000</b><span lang="es">preguntas en 7 categorías</span><span lang="en">questions across 7 categories</span></p>
+          <p class="sobre-dato"><b>+4.500</b><span lang="es">preguntas en 8 categorías</span><span lang="en">questions across 8 categories</span></p>
           <p class="sobre-dato"><b>1vs1</b><span lang="es">duelos contra otros jugadores</span><span lang="en">duels against other players</span></p>
           <p class="sobre-dato"><b>+50</b><span lang="es">logros por desbloquear</span><span lang="en">achievements to unlock</span></p>
           <p class="sobre-dato"><b>0 €</b><span lang="es">gratis, sin pagar por jugar</span><span lang="en">free, no paying to play</span></p>
@@ -644,7 +652,7 @@
         <!-- FormSubmit reenvia el formulario al correo sin necesidad de servidor, que es lo
              unico que se puede hacer en GitHub Pages: aqui no hay backend donde procesar nada. -->
         <form action="https://formsubmit.co/trivixsn@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Mensaje desde la web de TriviX">
+          <input type="hidden" name="_subject" value="Mensaje desde la web de TriviX League">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
           <input type="text" name="_honey" class="miel" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -700,8 +708,8 @@
           <span lang="es">Nuestras redes sociales</span><span lang="en">Our social media</span>
         </h3>
         <p class="redes-pie" style="margin:0 0 20px;">
-          <span lang="es">Subimos preguntas, duelos y novedades de la app.</span>
-          <span lang="en">We post questions, duels and app news.</span>
+          <span lang="es">Subimos preguntas, duelos y novedades de la app en TikTok, Instagram y YouTube.</span>
+          <span lang="en">We post questions, duels and app news on TikTok, Instagram and YouTube.</span>
         </p>
 
         <a class="red" href="https://www.tiktok.com/@trivixstudio" target="_blank" rel="noopener noreferrer">
@@ -711,6 +719,31 @@
           <span class="red-texto">
             <b>TikTok</b>
             <span>@TriviXStudio</span>
+          </span>
+          <span class="red-flecha" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="red" href="https://www.instagram.com/trivixstudio/" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.64.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.26-.07-1.64-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.26-.06 1.64-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38A5.9 5.9 0 0 0 .63 4.14c-.3.76-.5 1.64-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.9 5.9 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.9 5.9 0 0 0 2.13-1.38 5.9 5.9 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Z" fill="#E1306C"/>
+            <path d="M12 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Z" fill="#E1306C"/>
+            <circle cx="18.41" cy="5.59" r="1.44" fill="#E1306C"/>
+          </svg>
+          <span class="red-texto">
+            <b>Instagram</b>
+            <span>@trivixstudio</span>
+          </span>
+          <span class="red-flecha" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="red" href="https://www.youtube.com/@TriviXStudio-League" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.08 0 12 0 12s0 3.92.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.92 24 12 24 12s0-3.92-.5-5.81Z" fill="#FF0000"/>
+            <path d="M9.55 15.57 15.82 12 9.55 8.43v7.14Z" fill="#FFFFFF"/>
+          </svg>
+          <span class="red-texto">
+            <b>YouTube</b>
+            <span>@TriviXStudio-League</span>
           </span>
           <span class="red-flecha" aria-hidden="true">↗</span>
         </a>
@@ -730,21 +763,23 @@
 
 <footer>
   <div class="footer-int">
-    <a class="marca" href="#inicio" style="font-size:18px;"><img class="icono" src="icono.png" alt="" width="28" height="28" style="width:28px;height:28px;">Trivi<span class="x">X</span></a>
+    <a class="marca" href="#inicio" style="font-size:18px;"><img class="icono" src="icono.png?v=3" alt="" width="28" height="28" style="width:28px;height:28px;"><span class="marca-txt"><span>Trivi<span class="x">X</span></span><span class="marca-league"><span class="x">L</span>EAGUE</span></span></a>
     <nav class="footer-links">
       <a href="#modos"><span lang="es">Modos de juego</span><span lang="en">Game modes</span></a>
       <a href="#rangos"><span lang="es">Rangos</span><span lang="en">Ranks</span></a>
       <a href="#sobre"><span lang="es">Sobre nosotros</span><span lang="en">About us</span></a>
       <a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a>
       <a href="https://www.tiktok.com/@trivixstudio" target="_blank" rel="noopener noreferrer">TikTok</a>
+      <a href="https://www.instagram.com/trivixstudio/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.youtube.com/@TriviXStudio-League" target="_blank" rel="noopener noreferrer">YouTube</a>
       <a href="privacidad.html"><span lang="es">Política de privacidad</span><span lang="en">Privacy policy</span></a>
       <a href="borrar-cuenta.html"><span lang="es">Eliminar cuenta</span><span lang="en">Delete account</span></a>
       <a href="mailto:TriviXsn@gmail.com">TriviXsn@gmail.com</a>
     </nav>
   </div>
   <p class="footer-copy" style="max-width:1120px;margin:22px auto 0;">
-    <span lang="es">© 2026 TriviX. Todas las marcas mencionadas pertenecen a sus respectivos dueños.</span>
-    <span lang="en">© 2026 TriviX. All trademarks mentioned belong to their respective owners.</span>
+    <span lang="es">© 2026 TriviX League. Todas las marcas mencionadas pertenecen a sus respectivos dueños.</span>
+    <span lang="en">© 2026 TriviX League. All trademarks mentioned belong to their respective owners.</span>
   </p>
 </footer>
 
